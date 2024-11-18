@@ -17,8 +17,6 @@ def get_hash(to_hash):
     """You can use """
     return sha256(to_hash.encode('utf-8')).hexdigest().upper()
 
-print(get_hash('gopokes'))
-
 # Files and Exceptions
 
 # For this assignment, you will be writing a program to "crack" a password. You will need to open the file `hash` as this is the password you are trying to "crack."
@@ -47,10 +45,11 @@ print(get_hash('gopokes'))
 try:
     hash_file = open('hash', 'r') 
     actual_password = hash_file.read().strip()
+    hash_file.close()
 
 except FileNotFoundError:
-    print("Error: File Not Found.")
-    quit
+    print("Error: 'hash' File Not Found.")
+    quit()
 
 try:
     passwords_file = open('rockyou.txt', 'r')
@@ -58,10 +57,11 @@ try:
     for line in passwords_file:
         line = line.strip()
         passwords_list.append(line)
+    passwords_file.close()
 
 except FileNotFoundError:
-    print("Error: File Not Found.")
-    quit
+    print("Error: 'rockyou.txt' Not Found.")
+    quit()
 
 try:
     for password in passwords_list:
@@ -71,3 +71,4 @@ try:
 
 except:
     print("No Password Found.")
+    quit()
